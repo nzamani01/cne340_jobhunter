@@ -48,15 +48,24 @@ def add_new_job(cursor, jobdetails):
 
 # Check if new job
 def check_if_job_exists(cursor, jobdetails):
-    pass
     ##Add your code here
-    #query = "UPDATE"
-   # return query_sql(cursor, query)
+    # get job id of jobdetails {key: pair, key: pair}
+    job_id = jobdetails['id']
+    # check if job id is in the jobs table
+    query = f"SELECT Job_id FROM jobs WHERE Job_id = {job_id}"
+    cursor = query_sql(cursor, query)
+    # if true - don't add job to the table
+    if cursor.fetchone() is not None:
+        return True
+    # if false - add job to the table
+    else:
+        return False
 
 # Deletes job
 def delete_job(cursor, jobdetails):
     ##Add your code here
-    query = "UPDATE"
+    job_id = jobdetails['id']
+    query = f"DELETE FROM jobs WHERE Job_id = {job_id}"
     return query_sql(cursor, query)
 
 
